@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="hero">
+
+    <h1>GlowCart Beauty Store</h1>
+
+    <p>
+        Discover Makeup, Skincare, Haircare and Beauty Essentials
+    </p>
+
+    <a href="#products" class="btn btn-light btn-lg">
+    Shop Now
+</a>
+
+</div>
+
+<br><br>
+
+<h2 class="text-center">
+    Featured Categories
+</h2>
+
+<br>
+
+<div class="row">
+
+    <div class="col-md-3">
+        <a href="/?category=makeup" class="text-decoration-none text-dark">
+            <div class="category-card">
+                💄
+                <h4>Makeup</h4>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-3">
+        <a href="/?category=skincare" class="text-decoration-none text-dark">
+            <div class="category-card">
+                🧴
+                <h4>Skincare</h4>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-3">
+        <a href="/?category=haircare" class="text-decoration-none text-dark">
+            <div class="category-card">
+                💇
+                <h4>Haircare</h4>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-3">
+        <a href="/?category=perfumes" class="text-decoration-none text-dark">
+            <div class="category-card">
+                🌸
+                <h4>Perfumes</h4>
+            </div>
+        </a>
+    </div>
+
+</div>
+
+<br><br>
+
+<h2 class="text-center" id="products">
+    Featured Products
+</h2>
+
+<br>
+
+<div class="row">
+
+    {% for product in products %}
+
+    <div class="col-md-4 mb-4">
+
+        <div class="card product-card h-100">
+
+            <div class="position-relative">
+
+    {% if product.image %}
+    <img src="{{ product.image.url }}"
+         class="card-img-top"
+         style="height:250px; object-fit:cover;">
+    {% endif %}
+
+    {% if product.best_seller %}
+    <span class="badge bg-danger position-absolute top-0 start-0 m-2">
+        🔥 Best Seller
+    </span>
+    {% endif %}
+
+    {% if product.new_arrival %}
+    <span class="badge bg-success position-absolute top-0 end-0 m-2">
+        🆕 New
+    </span>
+    {% endif %}
+
+    {% if product.discount > 0 %}
+    <span class="badge bg-warning text-dark position-absolute bottom-0 end-0 m-2">
+        {{ product.discount }}% OFF
+    </span>
+    {% endif %}
+
+</div>
+
+            <div class="card-body">
+
+                <h4>{{ product.name }}</h4>
+
+                <p>{{ product.description }}</p>
+
+                <h5 class="text-success">
+                    ₹{{ product.price }}
+                </h5>
+
+                <a href="{% url 'add_to_wishlist' product.id %}"
+                   class="btn btn-outline-danger w-100 mb-2">
+                    ❤️ Add to Wishlist
+                </a>
+
+                <a href="{% url 'product_detail' product.id %}"
+                   class="btn btn-primary w-100">
+                    View Product
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% empty %}
+
+    <div class="col-12">
+
+        <div class="alert alert-warning text-center">
+
+            No products found.
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

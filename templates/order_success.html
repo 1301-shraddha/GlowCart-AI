@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="text-center mt-5">
+
+    <h1 class="text-success">
+        🎉 Order Placed Successfully!
+    </h1>
+
+    <br>
+
+    <p class="lead">
+        Thank you for shopping with GlowCart.
+    </p>
+
+    <p>
+        Your order has been received successfully.
+    </p>
+
+    <br>
+
+    <a href="{% url 'home' %}" class="btn btn-primary">
+        Continue Shopping
+    </a>
+
+    <a href="{% url 'my_orders' %}" class="btn btn-success">
+        My Orders
+    </a>
+
+</div>
+
+{% endblock %}

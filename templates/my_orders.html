@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 class="text-center mb-4">
+    📦 My Orders
+</h2>
+
+{% if orders %}
+
+<table class="table table-bordered table-striped">
+
+    <thead class="table-dark">
+        <tr>
+            <th>Order ID</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Total</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        {% for order in orders %}
+
+        <tr>
+
+            <td>#{{ order.id }}</td>
+
+            <td>{{ order.full_name }}</td>
+
+            <td>{{ order.phone }}</td>
+
+            <td>₹{{ order.total_amount }}</td>
+
+            <td>{{ order.created_at }}</td>
+
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+{% else %}
+
+<div class="alert alert-info text-center">
+
+    <h4>No Orders Yet 📦</h4>
+
+</div>
+
+{% endif %}
+
+{% endblock %}

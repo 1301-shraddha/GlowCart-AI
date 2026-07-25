@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 class="text-center">🛒 My Cart</h2>
+
+<br>
+
+{% if items %}
+
+<div class="row">
+
+    {% for item in items %}
+
+    <div class="col-md-4 mb-4">
+
+        <div class="card h-100">
+
+            {% if item.product.image %}
+            <img src="{{ item.product.image.url }}"
+                 class="card-img-top"
+                 style="height:250px; object-fit:cover;">
+            {% endif %}
+
+            <div class="card-body">
+
+                <h4>{{ item.product.name }}</h4>
+
+                <p>{{ item.product.description }}</p>
+
+                <h5 class="text-success">
+                    ₹{{ item.product.price }}
+                </h5>
+
+                <p>
+                    <b>Quantity:</b> {{ item.quantity }}
+                </p>
+
+                <p>
+                    <b>Subtotal:</b> ₹{{ item.subtotal }}
+                </p>
+
+                <div class="d-flex align-items-center gap-2 mt-3">
+
+                    <a href="{% url 'remove_from_cart' item.product.id %}"
+                       class="btn btn-danger">
+                        -
+                    </a>
+
+                    <span class="fw-bold fs-5">
+                        {{ item.quantity }}
+                    </span>
+
+                    <a href="{% url 'add_to_cart' item.product.id %}"
+                       class="btn btn-success">
+                        +
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+<hr>
+
+<h3 class="text-end">
+    Total: ₹{{ total }}
+</h3>
+
+<div class="d-flex justify-content-between">
+
+    <a href="{% url 'home' %}" class="btn btn-secondary">
+        Continue Shopping
+    </a>
+
+    <a href="{% url 'checkout' %}" class="btn btn-success">
+        Proceed to Checkout
+    </a>
+
+</div>
+
+{% else %}
+
+<div class="alert alert-info text-center">
+
+    <h4>Your Cart is Empty 🛒</h4>
+
+</div>
+
+<div class="text-center">
+
+    <a href="{% url 'home' %}" class="btn btn-primary">
+        Go Shopping
+    </a>
+
+</div>
+
+{% endif %}
+
+{% endblock %}
