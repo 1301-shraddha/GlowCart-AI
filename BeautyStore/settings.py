@@ -25,7 +25,11 @@ SECRET_KEY = 'django-insecure-x%7+vbg(h5%j012d+f*od#z67y#2+x)q#+9wwi4zzpw6zix4=-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "127.0.0.1",
+    "localhost",
+    "glowcart-ai-2.onrender.com",
+]
 
 
 # Application definition
