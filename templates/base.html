@@ -262,8 +262,8 @@ async function sendMessage(){
     try{
 
         const response = await fetch(
-            `http://127.0.0.1:8001/chat?message=${encodeURIComponent(message)}`
-        );
+    `https://glowcart-ai-backend-1301.onrender.com/chat?message=${encodeURIComponent(message)}`
+);
 
         const data = await response.json();
 

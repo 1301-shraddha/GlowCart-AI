@@ -51,8 +51,8 @@ async function getRecommendation(){
     let skin = document.getElementById("skin").value;
 
     const response = await fetch(
-        `http://127.0.0.1:8001/recommend?skin=${skin}`
-    );
+    `https://glowcart-ai-backend-1301.onrender.com/recommend?skin=${skin}`
+);
 
     const data = await response.json();
 
