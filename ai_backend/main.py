@@ -24,7 +24,7 @@ def home():
 @app.get("/recommend")
 def recommend(skin: str):
 
-    conn = sqlite3.connect("../db.sqlite3")
+    conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
 
     cursor.execute("""
@@ -69,7 +69,7 @@ def chat(message: str):
             "reply": "Please tell me your skin type (oily, dry or all)."
         }
 
-    conn = sqlite3.connect("../db.sqlite3")
+    conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
 
     cursor.execute("""
