@@ -271,13 +271,14 @@ def contact(request):
     return render(request, "contact.html")
 
 from django.http import JsonResponse
+import requests
 
 def ai_recommend(request):
 
     skin = request.GET.get("skin", "normal")
 
     response = requests.get(
-        f"http://127.0.0.1:8001/recommend?skin={skin}"
+        f"https://glowcart-ai-backend-1301.onrender.com/recommend?skin={skin}"
     )
 
     return JsonResponse(response.json())

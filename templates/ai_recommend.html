@@ -51,7 +51,7 @@ async function getRecommendation(){
     let skin = document.getElementById("skin").value;
 
     const response = await fetch(
-    `https://glowcart-ai-backend-1301.onrender.com/recommend?skin=${skin}`
+        `/ai-recommend/?skin=${skin}`
 );
 
     const data = await response.json();
