@@ -54,44 +54,82 @@ def chat(message: str):
 
     msg = message.lower()
 
-    # Detect skin type
+    # Greetings
+    if any(word in msg for word in ["hi", "hello", "hey"]):
+        return {
+            "reply":
+            "👋 Hello! Welcome to GlowCart Beauty Store.\n\n"
+            "I'm your AI Beauty Assistant 💜\n\n"
+            "I can help you with:\n"
+            "• Skincare\n"
+            "• Makeup\n"
+            "• Haircare\n"
+            "• Perfumes\n"
+            "• Product Recommendations\n\n"
+            "How can I help you today?"
+        }
+
+    if "thank" in msg:
+        return {
+            "reply":
+            "😊 You're welcome!\n\nHappy Shopping at GlowCart 💜"
+        }
+
+    if "bye" in msg:
+        return {
+            "reply":
+            "👋 Goodbye!\nTake care and have a beautiful day 💜"
+        }
+
+    # Skin detection
+
     if "oily" in msg:
         skin = "oily"
 
     elif "dry" in msg:
         skin = "dry"
 
-    elif "all" in msg:
+    elif "all" in msg or "normal" in msg:
         skin = "all"
 
     else:
         return {
-            "reply": "Please tell me your skin type (oily, dry or all)."
+            "reply":
+            "😊 Please tell me your skin type.\n\n"
+            "Example:\n"
+            "• I have oily skin\n"
+            "• My skin is dry\n"
+            "• I have normal skin"
         }
 
     conn = sqlite3.connect(DB_PATH)
+
     cursor = conn.cursor()
 
     cursor.execute("""
         SELECT name, price
         FROM shop_product
-        WHERE skin_type = ? OR skin_type = 'all'
-    """, (skin,))
+        WHERE skin_type=?
+        LIMIT 5
+    """,(skin,))
 
     rows = cursor.fetchall()
 
     conn.close()
 
-    if len(rows) == 0:
+    if not rows:
         return {
-            "reply": "Sorry, no products found."
+            "reply":"Sorry 😔 No products found."
         }
 
-    reply = f"Recommended products for {skin} skin:\n\n"
+    reply = f"✨ Recommended products for {skin} skin:\n\n"
 
     for product in rows:
+
         reply += f"• {product[0]} - ₹{product[1]}\n"
 
+    reply += "\n💜 Hope these products help!"
+
     return {
-        "reply": reply
+        "reply":reply
     }
