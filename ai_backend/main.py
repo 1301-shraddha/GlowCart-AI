@@ -3,8 +3,8 @@ import sqlite3
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-BASE_DIR = Path(__file__).resolve().parent.parent
-DB_PATH = BASE_DIR / "db.sqlite3"
+BASE_DIR = Path(__file__).resolve().parent
+DB_PATH = BASE_DIR.parent / "db.sqlite3"
 
 app = FastAPI()
 app.add_middleware(
